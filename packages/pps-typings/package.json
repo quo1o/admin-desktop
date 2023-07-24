@@ -1,0 +1,13 @@
+{
+  "name": "@winstrike/pps-typings",
+  "version": "1.5.0",
+  "author": "Winstrike",
+  "description": "Typings of Proxy payment service",
+  "license": "ISC",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/winstrike/admin-desktop.git"
+  },
+  "types": "index"
+}

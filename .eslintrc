@@ -1,0 +1,53 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "eslint:recommended",
+    "preact",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
+  "plugins": ["@typescript-eslint"],
+  "parserOptions": {
+    "ecmaVersion": 2019,
+    "sourceType": "module",
+    "project": "tsconfig.json"
+  },
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/ban-ts-ignore": "off",
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/space-before-function-paren": "error",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/adjacent-overload-signatures": "off",
+    "@typescript-eslint/no-floating-promises": "error",
+    "quotes": ["error", "single"],
+    "no-console": ["error", { "allow": ["error"] }],
+    "max-len": ["error", { "code": 120 }],
+    "no-multiple-empty-lines": ["error", { "max": 1 }],
+    "semi": "error",
+    "keyword-spacing": "error",
+    "comma-dangle": ["error", "always-multiline"],
+    "eol-last": "error"
+  },
+  "overrides": [
+    {
+      "files": ["*.js"],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "no-duplicate-imports": "off"
+      }
+    }
+  ],
+  "env": {
+    "browser": true,
+    "node": true
+  }
+}

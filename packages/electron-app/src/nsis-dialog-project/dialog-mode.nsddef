@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This file was created by NSISDialogDesigner 1.5.0.0
+https://coolsoft.altervista.org/nsisdialogdesigner
+Do not edit manually!
+-->
+<Dialog Name="dialog_mode" Title="Dialog title..." Subtitle="Dialog subtitle...">
+  <RadioButton Name="WithoutKKTIntegrationRadioButton" Location="12, 84" Size="153, 24" Text="Без интеграции с ККТ" TabIndex="0" onClick="fnc_onModeClick" />
+  <CheckBox Name="EnableAutoupdateCheckBox" Location="12, 192" Size="165, 24" Text="Включить автообновление" Font="Microsoft Sans Serif, 8pt" Checked="True" TabIndex="1" onClick="fnc_onEnableAutoupdateClick" />
+  <RadioButton Name="ClassicRadioButton" Location="12, 36" Size="239, 24" Text="Классический (ФР MStar + терминал)" Checked="True" TabIndex="2" onClick="fnc_onModeClick" />
+  <RadioButton Name="KKMServerRadioButton" Location="12, 60" Text="KKMServer" TabIndex="3" onClick="fnc_onModeClick" />
+  <Label Name="ModeLabel" Location="12, 13" Size="99, 20" Text="Режим работы:" Font="Microsoft Sans Serif, 9pt" TabIndex="4" />
+</Dialog>

@@ -1,0 +1,26 @@
+{
+  "name": "@winstrike/ws-test-helper",
+  "version": "1.1.0",
+  "author": "Winstrike",
+  "description": "WebSocket testing helper for the 'websockets/ws' library",
+  "license": "ISC",
+  "main": "build/index.js",
+  "files": ["build/**/*"],
+  "scripts": {
+    "start": "yarn build",
+    "build": "tsc",
+    "prepublish": "yarn build",
+    "typecheck": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/winstrike/admin-desktop.git"
+  },
+  "engines": {
+    "node": "~14.16.0"
+  },
+  "peerDependencies": {
+    "jest": "^25.3.0",
+    "ws": "^7.2.5"
+  }
+}

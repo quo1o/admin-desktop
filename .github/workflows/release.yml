@@ -1,0 +1,62 @@
+name: Release app
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build_publish_app:
+    name: Build & publish app
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js 14.16.1
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.16.1
+          registry-url: https://npm.pkg.github.com/
+          scope: winstrike
+      - name: Install dependencies
+        run: yarn install
+        env:
+          # Specify custom .npmrc because actions/setup-node@v1 doesn't
+          # correctly set registry-url and token at Windows platform
+          NPM_CONFIG_USERCONFIG: .npmrc.ci
+          NODE_AUTH_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
+      - name: Build
+        run: yarn build
+      - name: Publish to S3
+        run: yarn publish-app
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          BOOKING_ADMIN_URL: https://booking-admin.winstrike.gg
+          BOOKING_API_URL: https://booking-api.winstrike.gg
+          WINSTRIKE_ID_URL: https://id.winstrike.gg
+          PS_WS_URL: wss://ws-payment-service.winstrike.gg
+          PS_HTTP_URL: https://payment-service.winstrike.gg
+          SENTRY_DSN: https://e8b6619c93a84c1b9f2b167b97e055e8@sentry.winstrike.dev/6
+          LOKI_URL: https://admin-desktop.incoming.loki.winstrike.dev
+          LOKI_LOGIN: ${{ secrets.LOKI_LOGIN }}
+          LOKI_PASSWORD: ${{ secrets.LOKI_PASSWORD }}
+  release:
+    name: Release
+    needs: build_publish_app
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Get version number
+      id: version
+      run: echo ::set-output name=version::$(echo ${GITHUB_REF#refs/tags/} | tr -d v)
+    - name: Create release
+      id: create_release
+      uses: actions/create-release@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: ${{ github.ref }}
+        draft: false
+        prerelease: false
+        body: |
+          Download installer: https://winstrike-admin-desktop-releases.s3.eu-central-1.amazonaws.com/releases/Касса+Winstrike+Setup+${{ steps.version.outputs.version }}.exe

@@ -1,0 +1,70 @@
+name: Build
+
+on:
+  issue_comment:
+    types: [created, edited]
+
+jobs:
+  build_publish:
+    name: Build
+    runs-on: windows-latest
+    if: github.event.comment.body == 'build'
+    steps:
+      - name: Fetch PR info
+        uses: octokit/request-action@v2.x
+        id: get_pr_ref
+        with:
+          route: GET /repos/winstrike/admin-desktop/pulls/${{ github.event.issue.number }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Parse PR info
+        id: parse_pr_info
+        uses: gr2m/get-json-paths-action@v1.x
+        with:
+          json: ${{ steps.get_pr_ref.outputs.data }}
+          ref: "head.ref"
+      - uses: actions/checkout@v1
+        with:
+          ref: ${{ steps.parse_pr_info.outputs.ref }}
+      - name: Use Node.js 14.16.1
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.16.1
+          registry-url: https://npm.pkg.github.com
+          scope: winstrike
+      - name: Install dependencies
+        run: yarn install
+        env:
+          # Specify custom .npmrc because actions/setup-node@v1 doesn't
+          # correctly set registry-url and token at Windows platform
+          NPM_CONFIG_USERCONFIG: .npmrc.ci
+          NODE_AUTH_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
+      - name: Generate build number
+        uses: einaregilsson/build-number@v3
+        id: build_number
+        with:
+          prefix: beta
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Print new build number
+        run: echo "Build number is ${{ steps.build_number.outputs.build_number }}"
+      - name: Set build params
+        run: node packages/electron-app/src/scripts/set-build-params --bucket-postfix test --number ${{ steps.build_number.outputs.build_number }}
+      - name: Build
+        run: yarn build
+      - name: Publish
+        run: yarn publish-app
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Get current package version
+        uses: tyankatsu0105/read-package-version-actions@v1
+        with: 
+          path: "packages/electron-app"
+        id: package_version
+      - name: Set installer link to PR comment
+        uses: Janealter/branch-pr-comment@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          message: "@${{ github.event.comment.user.login }} Build action is complete! [Download installer](https://winstrike-admin-desktop-releases-test.s3.eu-central-1.amazonaws.com/releases/Касса+Winstrike+Setup+${{ steps.package_version.outputs.version }}.exe)"
+          branch: ${{ steps.parse_pr_info.outputs.ref }}

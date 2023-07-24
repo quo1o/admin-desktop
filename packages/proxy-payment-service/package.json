@@ -1,0 +1,68 @@
+{
+  "name": "@winstrike/proxy-payment-service",
+  "version": "1.10.0",
+  "author": "Winstrike",
+  "description": "Proxy payment service",
+  "license": "MIT",
+  "main": "build/main.js",
+  "files": [
+    "build/**/*"
+  ],
+  "scripts": {
+    "start": "yarn build",
+    "build": "tsc -p tsconfig.build.json",
+    "test": "jest --clearCache && jest --runInBand",
+    "prepublish": "yarn build",
+    "typecheck": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/winstrike/admin-desktop.git"
+  },
+  "engines": {
+    "node": "~14.16.0"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "build",
+      "__tests__/helpers",
+      "__tests__/mocks"
+    ]
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^3.1.39",
+    "@types/faker": "^5.1.5",
+    "@types/jest": "^25.2.1",
+    "@types/line-reader": "^0.0.28",
+    "@types/lowdb": "^1.0.9",
+    "@types/promise-retry": "^1.1.1",
+    "@types/uuid": "^3.4.3",
+    "@types/ws": "^5.1.0",
+    "@winstrike/admin-desktop-common-node": "*",
+    "@winstrike/pps-typings": "*",
+    "@winstrike/ws-test-helper": "*",
+    "jest": "^25.3.0",
+    "nock": "^12.0.3",
+    "ts-jest": "^25.3.1"
+  },
+  "dependencies": {
+    "axios": "^0.20.0",
+    "axios-logger": "^2.3.1",
+    "date-fns": "^2.13.0",
+    "faker": "^5.2.0",
+    "iconv-lite": "^0.6.2",
+    "line-reader": "^0.4.0",
+    "lowdb": "^1.0.0",
+    "nanoid": "^3.1.3",
+    "nock": "^12.0.3",
+    "ping": "^0.2.2",
+    "promise-retry": "^2.0.1",
+    "uuid": "^8.3.0",
+    "ws": "^7.2.5"
+  },
+  "peerDependencies": {
+    "@sentry/node": ">=5.24.2"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "@winstrike/admin-desktop-common-browser",
+  "version": "1.0.1",
+  "author": "Winstrike",
+  "description": "Components and utils for browser part of admin-desktop that shared with other projects",
+  "license": "ISC",
+  "main": "build/index.js",
+  "files": ["build/**/*"],
+  "scripts": {
+    "start": "microbundle watch",
+    "build": "microbundle build",
+    "prepublish": "yarn build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/winstrike/admin-desktop.git"
+  },
+  "peerDependencies": {
+    "react": ">=16.x"
+  },
+  "dependencies": {
+    "fuse.js": "^6.4.1",
+    "use-debounce": "^3.4.3"
+  },
+  "devDependencies": {
+    "microbundle": "^0.12.3"
+  }
+}

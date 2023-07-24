@@ -1,0 +1,12 @@
+.DS_store
+node_modules
+build
+electron-builder.env
+.vscode
+.env
+.cache
+*.db.json
+*.log
+**/sb-pilot/**/*.[D-I]
+**/sb-pilot/**/p
+**/sb-pilot/**/pinpad.ini

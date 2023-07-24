@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This file was created by NSISDialogDesigner 1.5.0.0
+https://coolsoft.altervista.org/nsisdialogdesigner
+Do not edit manually!
+-->
+<Dialog Name="dialog">
+  <Label Name="OnlyForCassbyLabel" Location="12, 113" Size="114, 15" Text="Только для Cassby" Font="Microsoft Sans Serif, 7pt" ForeColor="Coral" TabIndex="0" />
+  <DropList Name="AcquiringTypeDropList" Location="144, 66" Size="177, 21" TabIndex="1" onChange="fnc_onAcquiringTypeChange">
+    <Items>
+      <value>Model1</value>
+      <value>Model2</value>
+      <value>Model3</value>
+    </Items>
+  </DropList>
+  <Label Name="AcquiringTypeLabel" Location="12, 66" Size="126, 21" Text="Тип эквайринга" Font="Microsoft Sans Serif, 9pt" TabIndex="2" />
+  <TextBox Name="TerminalIDTextBox" Location="144, 93" Size="57, 20" TabIndex="3" onChange="fnc_onTerminalIDChange" />
+  <Label Name="TerminalIDLabel" Location="12, 93" Size="126, 20" Text="ID терминала" Font="Microsoft Sans Serif, 9pt" TabIndex="4" />
+  <DropList Name="PrinterModelDropList" Location="144, 182" Size="177, 21" TabIndex="5" onChange="fnc_onPrinterModelChange">
+    <Items>
+      <value>Model1</value>
+      <value>Model2</value>
+      <value>Model3</value>
+    </Items>
+  </DropList>
+  <Label Name="PrinterModelLabel" Location="12, 182" Size="126, 21" Text="Модель принтера" Font="Microsoft Sans Serif, 9pt" TabIndex="6" />
+  <DropList Name="TerminalModelDropList" Location="144, 39" Size="177, 21" TabIndex="7" onChange="fnc_onTerminalModelChange">
+    <Items>
+      <value>Model1</value>
+      <value>Model2</value>
+      <value>Model3</value>
+    </Items>
+  </DropList>
+  <Label Name="TerminalModelLabel" Location="12, 39" Size="126, 21" Text="Модель терминала" Font="Microsoft Sans Serif, 9pt" TabIndex="8" />
+  <TextBox Name="PrinterIPTextBox" Location="144, 156" Size="294, 20" TabIndex="9" onChange="fnc_onPrinterIPChange" />
+  <Label Name="PrinterIPLabel" Location="12, 156" Size="126, 20" Text="IP-адрес принтера" Font="Microsoft Sans Serif, 9pt" TabIndex="10" />
+  <Label Name="TerminalIPLabel" Location="12, 13" Size="126, 20" Text="IP-адрес терминала" Font="Microsoft Sans Serif, 9pt" TabIndex="11" />
+  <TextBox Name="TerminalIPTextBox" Location="144, 13" Size="294, 20" TabIndex="12" onChange="fnc_onTerminalIPChange" />
+</Dialog>

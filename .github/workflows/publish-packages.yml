@@ -1,0 +1,32 @@
+  
+name: Publish packages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  publish:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js 14.16.1
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.16.1
+        registry-url: https://npm.pkg.github.com/
+        scope: winstrike
+    - name: Install dependencies
+      run: yarn install
+      env:
+        # Specify custom .npmrc because actions/setup-node@v1 doesn't
+        # correctly set registry-url and token at Windows platform
+        NPM_CONFIG_USERCONFIG: .npmrc.ci
+        NODE_AUTH_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
+    - name: Build
+      run: yarn build
+    - name: Publish
+      run: yarn publish-packages
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.REGISTRY_TOKEN }}

@@ -1,0 +1,2 @@
+preact: yarn start-preact
+electron: node src/scripts/wait-dev-server

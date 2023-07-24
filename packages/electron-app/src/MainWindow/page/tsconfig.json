@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "jsxFactory": "h",
+    "rootDir": "./",
+    "strict": true,
+    "strictNullChecks": true,
+    "esModuleInterop": true
+  },
+  "include": ["**/*.ts", "**/*.tsx", "../../typings/**/*.ts"]
+}

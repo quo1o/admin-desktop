@@ -1,0 +1,29 @@
+{
+  "name": "root",
+  "private": true,
+  "workspaces": {
+    "packages": ["packages/*"],
+    "nohoist": ["**/react-native", "**/react-native/**"]
+  },
+  "scripts": {
+    "start": "dotenv -- lerna run --parallel start --stream",
+    "bootstrap": "lerna bootstrap",
+    "build": "dotenv lerna run build --stream",
+    "typecheck": "lerna run typecheck --stream",
+    "test": "lerna run test --stream --no-bail -- --watchAll=false --verbose --color",
+    "package": "lerna run package --stream",
+    "publish-packages": "lerna publish from-package --yes",
+    "publish-app": "lerna run publish --stream",
+    "lint": "eslint . --ext .js,.ts,.tsx"
+  },
+  "devDependencies": {
+    "@types/node": "^14.17.27",
+    "@typescript-eslint/eslint-plugin": "^2.28.0",
+    "@typescript-eslint/parser": "^2.28.0",
+    "dotenv-cli": "^3.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-preact": "^1.1.1",
+    "lerna": "^3.20.2",
+    "typescript": "^3.8.3"
+  }
+}

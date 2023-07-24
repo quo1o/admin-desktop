@@ -1,0 +1,21 @@
+{
+  "name": "@winstrike/admin-desktop-common-node",
+  "version": "1.0.0",
+  "author": "Winstrike",
+  "description": "Utils for node part of admin-desktop that shared with other projects",
+  "license": "ISC",
+  "main": "build/index.js",
+  "files": ["build/**/*"],
+  "scripts": {
+    "start": "yarn build",
+    "build": "tsc",
+    "prepublish": "yarn build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/winstrike/admin-desktop.git"
+  },
+  "dependencies": {
+    "dotenv":"^8.2.0"
+  }
+}
